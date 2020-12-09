@@ -11,14 +11,14 @@ def search_url_builder(keyword):
 def snoop():
     url = search_url_builder("handbag")
     
-    capabilities = webdriver.DesiredCapabilities.FIREFOX
-    capabilities["marionette"] = True
-    firefox_bin = "/usr/bin/firefox"
-    opts = webdriver.FirefoxOptions()
+    opts = webdriver.ChromeOptions()
     opts.add_argument("--headless")
-    browser = webdriver.Firefox(firefox_binary=firefox_bin, capabilities=capabilities, executable_path="drivers/geckodriver", firefox_options=opts)
-    page = browser.get(url)
-    soup = BeautifulSoup(page, 'html.parser')
+    opts.add_argument("--no-sandbox")
+    opts.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Chrome(executable_path=r"drivers/chromedriver", options=opts)
+    driver.get("https://www.costco.com/")
+    print(driver.page_source)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     # costco-specific parsing:
     descs = soup.find_all("span", class_="description")
@@ -26,9 +26,8 @@ def snoop():
     for desc in descs:
         print (desc.contents[0])
     
-    web_driver.close()
-    web_driver.quit()
+    driver.close()
+    driver.quit()
 
 if __name__ == '__main__':
     snoop()
-

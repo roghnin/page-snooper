@@ -19,7 +19,7 @@ import os
 from apiclient import errors
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/gmail.send']
+SCOPES = ['https://mail.google.com/']
 
 def connect():
     creds = None
