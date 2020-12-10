@@ -10,5 +10,7 @@ if __name__ == '__main__':
         print("snooping...")
         try:
             costco.snoop()
+        except Exception:
+            pass
         print("sleep.")
         sleep(5 * 60)
