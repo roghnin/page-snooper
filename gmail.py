@@ -17,6 +17,7 @@ from email.mime.text import MIMEText
 import mimetypes
 import os
 from apiclient import errors
+import json
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://mail.google.com/']
@@ -58,11 +59,14 @@ def do_send(service, message):
     except errors.HttpError as error:
         print ('An error occurred: %s' % error)
 
-def send_messages(to_list, subject, message_text):
+def send_messages(subject, message_text):
+    to_list_file = open("to_list.json", "r")
+    to_list = json.load(to_list_file)
     service = connect()
     for to in to_list:
         message = build_message(to, "roghnin@gmail.com", subject, message_text)
         do_send(service, message)
+    to_list_file.close()
 
 if __name__ == '__main__':
     # test out connection.
