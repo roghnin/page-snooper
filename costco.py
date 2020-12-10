@@ -7,8 +7,8 @@ import os
 from datetime import datetime
 import pytz
 
-base_urls = [{"name":"US", "url":"https://www.costco.com/CatalogSearch?dept=All&sortBy=item_added_date+desc&keyword="},
-    {"name":"Canada", "url":"https://www.costco.ca/CatalogSearch?dept=All&sortBy=item_added_date+desc&keyword="}]
+base_urls = [{"name":"US", "url":"https://www.costco.com/CatalogSearch?sortBy=DatePublish&dept=All&keyword="},
+    {"name":"Canada", "url":"https://www.costco.ca/CatalogSearch?sortBy=item_added_date&dept=All&keyword="}]
 keywords = ["handbag"]
 
 def get_name(dic):
