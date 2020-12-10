@@ -44,7 +44,7 @@ def connect():
     return build('gmail', 'v1', credentials=creds)
 
 def build_message(to, sender, subject, message_text):
-    message = MIMEText(message_text)
+    message = MIMEText(message_text.encode("utf-8"))
     message['to'] = to
     message['from'] = sender
     message['subject'] = subject
