@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 import gmail
+import os
 from datetime import datetime
 
 base_url = "https://www.costco.com/CatalogSearch?dept=All&sortBy=item_added_date+desc&keyword="
@@ -28,7 +29,10 @@ def snoop():
             item_raw = desc.find("a")
             curr_newest.append({'name':item_raw.get_text().strip('\t\n'), 'url':item_raw['href']})
         # curr_newest.sort(key = get_name)
+        
         file_name = keyword+"_last_newest.json"
+        if (not os.path.isfile(file_name)):
+            json.dump([], open(file_name, "w"))
         dump_file = open(file_name, "r")
         last_newest = json.load(dump_file)
         if (last_newest and last_newest[0] == curr_newest[0]):
