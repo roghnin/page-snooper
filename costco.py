@@ -19,6 +19,7 @@ def snoop():
     for keyword in keywords:
         url = search_url_builder(keyword)
         driver = my_web_driver.get_driver()
+        driver.implicitly_wait(20) # seconds
         driver.get(url)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -29,6 +30,10 @@ def snoop():
             item_raw = desc.find("a")
             curr_newest.append({'name':item_raw.get_text().strip('\t\n'), 'url':item_raw['href']})
         # curr_newest.sort(key = get_name)
+        print("curr_newest:")
+        print (curr_newest)
+        if (not curr_newest):
+            print(driver.page_source)
         
         file_name = keyword+"_last_newest.json"
         if (not os.path.isfile(file_name)):
@@ -48,7 +53,7 @@ def snoop():
 
         # send messages
         if updates:
-            message_text = ""
+            message_text = "result page: "+url+"\n\n"
             for item in updates:
                 message_text += item["name"]+"\n"+item["url"]+"\n\n"
             gmail.send_messages("costco "+keyword+" update @ "+datetime.now().strftime("%d/%m/%Y %H:%M:%S"), message_text)

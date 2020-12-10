@@ -1,5 +1,8 @@
+from time import sleep
 import gmail
 import costco
 
 if __name__ == '__main__':
-    costco.snoop()
+    while(True):
+        costco.snoop()
+        sleep(5 * 60)
