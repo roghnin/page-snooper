@@ -13,4 +13,4 @@ if __name__ == '__main__':
         except Exception:
             pass
         print("sleep.")
-        sleep(5 * 60)
+        sleep(10 * 60)
