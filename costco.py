@@ -8,7 +8,7 @@ from datetime import datetime
 import pytz
 import time
 
-base_urls = [{"name":"US", "url":"https://www.costco.com/CatalogSearch?sortBy=DatePublish&dept=All&keyword="},
+base_urls = [{"name":"US", "url":"https://www.costco.com/CatalogSearch?dept=All&searchProvider=lucidworks&sortBy=item_added_date&keyword="},
     {"name":"Canada", "url":"https://www.costco.ca/CatalogSearch?sortBy=item_added_date&dept=All&keyword="}]
 keywords = ["handbag"]
 
@@ -87,9 +87,9 @@ def snoop():
             last_newest = last_newest_tmp
 
             # if the current newest is in last_newest, nothing new is coming up. skip this iteration.
-            if (last_newest and curr_newest[0] in last_newest):
-                write_to_file(last_newest, file_name)
-                continue
+            # if (last_newest and curr_newest[0] in last_newest):
+            #     write_to_file(last_newest, file_name)
+            #     continue
             
             # find actual updates in curr_newest, and renew seen stuff.
             updates = []
